@@ -1,0 +1,22 @@
+name: cdn
+
+on:
+  schedule:
+  - cron: "0 0/6 * * *"
+jobs:
+  my_job:
+    name: wget
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Git pull
+      uses: actions/checkout@v4
+
+    - name: wget
+      run: wget https://manifest.intro-skipper.workers.dev/manifest.json
+
+    - name: commit
+      run: ls -al
+
+    - name: add-commit-push
+      uses: actions4git/add-commit-push@v1
